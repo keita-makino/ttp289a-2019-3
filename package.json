@@ -1,8 +1,8 @@
 {
-  "name": "ttp289a-2019-2",
+  "name": "ttp289a-2019-3",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://keita-makino.github.io/ttp289a-2019-2",
+  "homepage": "https://keita-makino.github.io/ttp289a-2019-3",
   "dependencies": {
     "@material-ui/core": "^4.6.0",
     "@mdx-js/react": "^1.5.1",

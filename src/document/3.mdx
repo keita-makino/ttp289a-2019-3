@@ -12,13 +12,13 @@ The first model we can create has rapid-transit in the root layer, and has train
 
 We can justify this structure with an assumption that whether the mode can handle long-distance travel or not is the most importance factor to narrow down the choices for the individual. With this criteria, rapid-transit, which usually serves only within city central, will be clearly distinguished from the others.
 
-The next structure is to isolate train from the other two. This structure assumes that people most evaluate the factor whether there is a frequent service (rapid-transit) or general availability (automobile).
-
 <img src={require('../data/image3.png')} width={'60%'} />
 
-The last structure separates automobile from the rapid transit and train. Under this model, people would first choose if they like to use public transit or private mode.
+The next structure is to isolate train from the other two. This structure assumes that people most evaluate the factor whether there is a frequent service (rapid-transit) or general availability (automobile).
 
 <img src={require('../data/image4.png')} width={'60%'} />
+
+The last structure separates automobile from the rapid transit and train. Under this model, people would first choose if they like to use public transit or private mode.
 
 We name the nested models with these structure respectively NE, NT, and NA model. The following tables shows the details of the nested models.
 
@@ -60,6 +60,8 @@ We name the nested models with these structure respectively NE, NT, and NA model
 | Travel Time            | -0.050                      | 0.014           | -2.930 \*\*          |
 | $\Theta_{(Group)}$     | 0.550                       | 0.192           | -2.930 \*\*          |
 | $\mathcal{L}$: -62.048 | $\mathcal{L}(EL)$: -125.242 | $\rho^2$: 0.505 | Adj. $\rho^2$: 0.465 |
+
+First of all, we can easily see that the first two models (NE, NT) are invalid because the scaliing parameter $Theta_{(Group)}$ is larger than 1, which contradicts a theoretical derivation of the parameter. Given this result, we argue only the NA model in this section.
 
 <Bar param={'lhfs1'} />
 <Bar param={'lhfs3'} />
