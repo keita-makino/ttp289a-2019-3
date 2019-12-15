@@ -16,36 +16,36 @@ The following tables displays the details of the three restricted models, namely
 
 **Table 5.1. RE Model (N=65)**
 
-| Variable               | Estimate                   | Std. Error      | t-Sta.               |
-| ---------------------- | -------------------------- | --------------- | -------------------- |
-| asc_train              | -1.401                     | 0.956           | -1.464 \*            |
-| asc_auto               | (base)                     | -               | -                    |
-| General Service        | 0.467                      | 0.507           | 0.921                |
-| Lack of Travel Stress  | 1.052                      | 0.462           | 2.277 \*\*           |
-| Travel Time            | -0.068                     | 0.028           | -2.459 \*\*          |
-| $\mathcal{L}$: -18.494 | $\mathcal{L}(EL)$: -45.055 | $\rho^2$: 0.590 | Adj. $\rho^2$: 0.501 |
+| Variable               | Estimate                   | Std. Error             | t-Sta.                      |
+| ---------------------- | -------------------------- | ---------------------- | --------------------------- |
+| asc_train              | -1.401                     | 0.956                  | -1.464                      |
+| asc_auto               | (base)                     | -                      | -                           |
+| General Service        | 0.467                      | 0.507                  | 0.921                       |
+| Lack of Travel Stress  | 1.052                      | 0.462                  | 2.277 \*\*                  |
+| Travel Time            | -0.068                     | 0.028                  | -2.459 \*\*                 |
+| $\mathcal{L}$: -18.494 | $\mathcal{L}(EL)$: -45.055 | $\rho^2_{(EL)}$: 0.590 | Adj. $\rho^2_{(EL)}$: 0.501 |
 
 **Table 5.2. RT Model (N=94)**
 
-| Variable               | Estimate                   | Std. Error      | t-Sta.               |
-| ---------------------- | -------------------------- | --------------- | -------------------- |
-| asc_el                 | -0.321                     | 0.551           | -0.583               |
-| asc_auto               | (base)                     | -               | -                    |
-| General Service        | 0.998                      | 0.385           | 2.597 \*\*           |
-| Lack of Travel Stress  | 1.471                      | 0.443           | 3.324 \*\*           |
-| Travel Time            | -0.015                     | 0.022           | -0.684               |
-| $\mathcal{L}$: -32.380 | $\mathcal{L}(EL)$: -65.156 | $\rho^2$: 0.503 | Adj. $\rho^2$: 0.442 |
+| Variable               | Estimate                   | Std. Error             | t-Sta.                      |
+| ---------------------- | -------------------------- | ---------------------- | --------------------------- |
+| asc_el                 | -0.321                     | 0.551                  | -0.583                      |
+| asc_auto               | (base)                     | -                      | -                           |
+| General Service        | 0.998                      | 0.385                  | 2.597 \*\*                  |
+| Lack of Travel Stress  | 1.471                      | 0.443                  | 3.324 \*\*                  |
+| Travel Time            | -0.015                     | 0.022                  | -0.684                      |
+| $\mathcal{L}$: -32.380 | $\mathcal{L}(EL)$: -65.156 | $\rho^2_{(EL)}$: 0.503 | Adj. $\rho^2_{(EL)}$: 0.442 |
 
 **Table 5.3. RA Model (N=69)**
 
-| Variable               | Estimate                   | Std. Error      | t-Sta.               |
-| ---------------------- | -------------------------- | --------------- | -------------------- |
-| asc_el                 | 1.364                      | 0.904           | -1.510 \*            |
-| asc_train              | (base)                     | -               | -                    |
-| General Service        | 1.774                      | 0.700           | 2.533 \*\*           |
-| Lack of Travel Stress  | 1.232                      | 0.539           | 2.288 \*\*           |
-| Travel Time            | -0.116                     | 0.040           | -2.884 \*\*          |
-| $\mathcal{L}$: -15.461 | $\mathcal{L}(EL)$: -47.827 | $\rho^2$: 0.677 | Adj. $\rho^2$: 0.593 |
+| Variable               | Estimate                   | Std. Error             | t-Sta.                      |
+| ---------------------- | -------------------------- | ---------------------- | --------------------------- |
+| asc_el                 | 1.364                      | 0.904                  | -1.510                      |
+| asc_train              | (base)                     | -                      | -                           |
+| General Service        | 1.774                      | 0.700                  | 2.533 \*\*                  |
+| Lack of Travel Stress  | 1.232                      | 0.539                  | 2.288 \*\*                  |
+| Travel Time            | -0.116                     | 0.040                  | -2.884 \*\*                 |
+| $\mathcal{L}$: -15.461 | $\mathcal{L}(EL)$: -47.827 | $\rho^2_{(EL)}$: 0.677 | Adj. $\rho^2_{(EL)}$: 0.593 |
 
 Then, the statistics can be evaluated as:
 
@@ -64,7 +64,7 @@ Then, considering that the statistics will follow $\chi(d.f.=4)$ under $H_0: \te
 $$
 \begin{cases}
   p(RE) = 1 - \displaystyle\int_{-\infty}^{3.039} \chi^2(x,4) dx = 0.551 \\
-  p(RT) = 1 - \displaystyle\int_{-\infty}^{12.942} \chi^2(x,4) dx = 0.012 \\
+  p(RT) = 1 - \displaystyle\int_{-\infty}^{12.942} \chi^2(x,4) dx = 0.012 \text{ **} \\
   p(RA) = 1 - \displaystyle\int_{-\infty}^{4.374} \chi^2(x,4) dx = 0.358
 \end{cases}
 $$

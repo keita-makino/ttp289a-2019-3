@@ -1,32 +1,37 @@
+import Bar from '../components/Bar.tsx';
+
 # 1.
 
-In this section, we will first evaluate a market share (MS) model and then create the base (BS) model with the following variables.
+In this part of the team assignment, we will develop several multinomial logit models and nested logit models and discuss topics regarding the performance of those models, IIA violation and so on. First, in this section, we will first evaluate a market share (MS) model and then create the base (BS) model, which will be used as the standard of the evaluation in the latter sections, with the following variables.
 
-| Variable       | Stands for            |
-| -------------- | --------------------- |
-| (asc_el/train) | (Constants)           |
-| lhfs1          | General Service       |
-| lhfs3          | Lack of Travel Stress |
-| minttime       | Travel Time           |
+**Table 1. Variables**
 
-Consequently, using `apoll$o` package in R, we have obtained the foll\$owing MS model.
+| Variable                    | Stands for            | Type    | Range          |
+| --------------------------- | --------------------- | ------- | -------------- |
+| (asc_el/asc_train/asc_auto) | (Constants)           | -       | -              |
+| lhfs1                       | General Service       | Float   | -2.858 - 1.715 |
+| lhfs3                       | Lack of Travel Stress | Float   | -2.258 - 1.820 |
+| minttime                    | Travel Time           | Integer | 2 - 160        |
 
-**Table 2. MS Model (N=174)**
+Consequently, using `apollo` package in R, we have obtained the following MS model.
 
-| Variable                | Estimate                    | Std. Error      | t-Sta.               |
-| ----------------------- | --------------------------- | --------------- | -------------------- |
-| asc_el                  | 0                           | 0.164           | 1.182e-7             |
-| asc_train               | -1.046                      | 0.228           | -4.588 \*\*          |
-| asc_auto                | (base)                      | -               | -                    |
-| $\mathcal{L}$: -175.964 | $\mathcal{L}(EL)$: -191.159 | $\rho^2$: 0.080 | Adj. $\rho^2$: 0.069 |
+**Table 2. MS Model (N=174)**  
+_\*: \* and \*\* respectively represents that the variable is significant with 90%/95% confidential level, assuming the t-Statistics will follow a normal distribution. We approximate a t-distribution to normal distribution as the sample size is larger than 30 in all the cases. Both will apply in the rest of the document._
 
-This result indicates that the market share of the rapid transit system and automobile are equal. Indeed, there are respectively in total 74 participants who choose either rapid transit or automobile. Compared to those modes, the train has much smaller market share. The ratio between the probability of choosing rapid transit and train indicates
+| Variable                | Estimate                    | Std. Error             | t-Sta.                      |
+| ----------------------- | --------------------------- | ---------------------- | --------------------------- |
+| asc_el                  | 0                           | 0.164                  | 1.182e-7                    |
+| asc_train               | -1.046                      | 0.228                  | -4.588 \*\*                 |
+| asc_auto                | (base)                      | -                      | -                           |
+| $\mathcal{L}$: -175.964 | $\mathcal{L}(EL)$: -191.159 | $\rho^2_{(EL)}$: 0.080 | Adj. $\rho^2_{(EL)}$: 0.069 |
+
+This result indicates that the market share of the rapid transit system (el: **el**evated transit) and automobile are equal. Indeed, there are respectively in total 74 participants who choose either rapid transit or automobile. Compared to those modes, the train has much smaller market share. The ratio between the probability of choosing rapid transit (or auto) and train can be evaluated by the ASC:
 
 $$
-\frac{p(\text{train})}{p(\text{el})} = \frac{\exp(-1.046)}{\exp(0)} = \frac{0.351}{1} = 35.1%
+\frac{p(\text{train})}{p(\text{el})} = \frac{\exp(-1.046)}{\exp(0)} = \frac{0.351}{1} = 35.1\%
 $$
 
-This number matches to the actual data where $26 = 74 \times 0.351$ participants choose the train mode.
+This number matches to the actual data where $74 \times 0.351 = 26$ participants choose the train mode.
 
 The MS model is the most primitive model with only two constants, and we can test if this model has a better performance than equal likely (EL) model, which always estimates the probability of choosing each mode as 1/3. With the statistic
 
@@ -51,32 +56,74 @@ $$
 1 - \int_{-\infty}^{30.39} \chi^2(x,2) dx = 2.517 \times 10^{-7}
 $$
 
-Given this, we can say that the MS model makes a better estimation than EL model do, although the overall performance is still quite far from the "perfect" model as the $\rho^2 = 0.080$ and adjusted $\rho^2 = 0.069$ shows.
+Given this, we can say that the MS model makes a better estimation than EL model does, although the overall performance is still quite far from the "perfect" model as the $\rho^2_{(EL)} = 0.080$ and adjusted $\rho^2_{(EL)} = 0.069$ shows.
 
 Next, the following tables displays the summary of our BS model and MS model with the same dataset for BS model.
 
 **Table 3. BS Model (N=114)**
 
-| Variable               | Estimate                    | Std. Error      | t-Sta.               |
-| ---------------------- | --------------------------- | --------------- | -------------------- |
-| asc_el                 | 0.450                       | 0.439           | 1.026                |
-| asc_train              | -0.795                      | 0.666           | -1.194               |
-| asc_auto               | (base)                      | -               | -                    |
-| General Service        | 1.070                       | 0.310           | 3.450 \*\*           |
-| Lack of Travel Stress  | 1.105                       | 0.285           | 3.878 \*\*           |
-| Travel Time            | -0.051                      | 0.018           | -2.930 \*\*          |
-| $\mathcal{L}$: -62.048 | $\mathcal{L}(EL)$: -125.242 | $\rho^2$: 0.505 | Adj. $\rho^2$: 0.465 |
+| Variable               | Estimate                    | Std. Error             | t-Sta.                      |
+| ---------------------- | --------------------------- | ---------------------- | --------------------------- |
+| asc_el                 | 0.450                       | 0.439                  | 1.026                       |
+| asc_train              | -0.795                      | 0.666                  | -1.194                      |
+| asc_auto               | (base)                      | -                      | -                           |
+| General Service        | 1.070                       | 0.310                  | 3.450 \*\*                  |
+| Lack of Travel Stress  | 1.105                       | 0.285                  | 3.878 \*\*                  |
+| Travel Time            | -0.051                      | 0.018                  | -2.930 \*\*                 |
+| $\mathcal{L}$: -62.048 | $\mathcal{L}(EL)$: -125.242 | $\rho^2_{(EL)}$: 0.505 | Adj. $\rho^2_{(EL)}$: 0.465 |
 
 **Table 4. MS Model with Dataset for BS Model (N=114)**
 
-| Variable                | Estimate                    | Std. Error      | t-Sta.               |
-| ----------------------- | --------------------------- | --------------- | -------------------- |
-| asc_el                  | 0.0852                      | 0.207           | 0.412                |
-| asc_train               | -0.811                      | 0.269           | -3.018 \*\*          |
-| asc_auto                | (base)                      | -               | -                    |
-| $\mathcal{L}$: -118.013 | $\mathcal{L}(EL)$: -125.242 | $\rho^2$: 0.058 | Adj. $\rho^2$: 0.042 |
+| Variable                | Estimate                    | Std. Error             | t-Sta.                      |
+| ----------------------- | --------------------------- | ---------------------- | --------------------------- |
+| asc_el                  | 0.085                       | 0.207                  | 0.412                       |
+| asc_train               | -0.811                      | 0.269                  | -3.018 \*\*                 |
+| asc_auto                | (base)                      | -                      | -                           |
+| $\mathcal{L}$: -118.013 | $\mathcal{L}(EL)$: -125.242 | $\rho^2_{(EL)}$: 0.058 | Adj. $\rho^2_{(EL)}$: 0.042 |
 
-We can see that the performance of the BS model has clearly improved from the MS model, with the difference of $$\rho^2$$ by $0.505 - 0.058 = 0.447$ and adjusted $$\rho^2$$ by $0.465 - 0.042 = 0.423$. Also, we can perform likelihood-ratio test with the statistic
+Looking at the result of BS model, it seems that all the variables other than ASCs have a significance in estimating the mode of each person. The first two variables: "general service" and "lack of travel stress" have a positive coefficient, which means that if the service quality increase or the stress from the travel decreases in a certain mode, the probability where a person will travel by that will increase. Using the idea of arc elasticity, we can point out that 0.1 unit of increase in the general service in one mode will lead to the odds-ratio between that mode and another mode become $\exp(0.107) = 1.113$. This is intuitive result as some people would evaluate the quality of service when choosing their travel mode. For example, if the value of the variable of general service increases in train mode by 1, for that individual the odds-ratio will be:
+
+$$
+\begin{aligned}
+  \text{(odds ratio)} &= \frac{\exp(U_{train}')}{\exp(U_{el})} / \frac{\exp(U_{train})}{\exp(U_{el})} \\
+  &= \frac{\exp(U_{train}')}{\exp(U_{train})} \\
+  &= \frac{\exp(U_{train} + 0.107)}{\exp(U_{train})} \\
+  &= \exp(0.107) \\
+  &= 1.113
+\end{aligned}
+$$
+
+Note that, however, this does not imply that the probability for that person to choose train increases by 2.915 times. Also, applying this equation with auto mode instead of rapid transit will give the same result. With the same equation, we can say that 0.1 unit increase of lack of travel stress (i.e., decrease of travel stress) in one mode will make the odds ratio be $exp(0.111) = 1.117$. This is also easy to understand with our common sense.
+
+On the other hand, an increase of travel time in one mode leads to that the mode will have less probability to be chosen by the person. This is again a natural and clear result, as many travelers will care the travel time in the first place. Using the arc elasticity, the odd-ratio given by **a unit** increase of the travel time in train is:
+
+$$
+\begin{aligned}
+  \text{(odds ratio)} &= \frac{\exp(U_{train}')}{\exp(U_{el})} / \frac{\exp(U_{train})}{\exp(U_{el})} \\
+  &= \frac{\exp(U_{train}')}{\exp(U_{train})} \\
+  &= \frac{\exp(U_{train} -0.051)}{\exp(U_{train})} \\
+  &= \exp(-0.051) \\
+  &= 0.950
+\end{aligned}
+$$
+
+Here, one must notice that the travel time has larger variance than others. The following figures displays the distribution of the variables with group of travel modes. Clearly, the order of travel time is larger than other variables, which indicates that a unit difference in travel time does not mean "a large difference" and in the same order of a 0.1 unit change in the other variables.
+
+<Bar param="lhfs1" label="General Service" />
+
+**Figure 1.1. Distribution of general service. yellow: rapid transit, blue: train, green: auto**
+
+<Bar param="lhfs3" label="Lack of Travel Stress" />
+
+**Figure 1.2. Distribution of lack of travel stress. yellow: rapid transit, blue: train, green: auto**
+
+<Bar param="minttime" label="Travel Time" />
+
+**Figure 1.3. Distribution of travel time. yellow: rapid transit, blue: train, green: auto**
+
+ASC do not have a significance in this BS model, which means the most of the estimation power were already exposed to the observed variables. The value of the ASCs are now representing the effect of unobserved variables, which could be cost for instance, to the decision of each individual. The value of asc_train did not differ from that in MS model (with dataset for BS model), but the asc_el has increased by 0.365. Which implies that unobserved variables now have a larger positive effect to choose rapid transit over auto mode than that in MS model.
+
+We can see that the performance of the BS model has clearly improved from the MS model, with the difference of $$\rho^2_{(EL)}$$ by $0.505 - 0.058 = 0.447$ and adjusted $$\rho^2_{(EL)}$$ by $0.465 - 0.042 = 0.423$. Also, we can perform likelihood-ratio test with the statistic
 
 $$
 \mathcal{L} = -2(-118.013 + 62.048) = 111.930 \sim \chi^2(\text{d.f. = 3}) \text{ under } H_0
@@ -94,8 +141,8 @@ $$
 1 - \int_{-\infty}^{111.930} \chi^2(x,3) dx = 4.216 \times 10^{-24}
 $$
 
-Therefore, we can conclude that the BS model certainly has a better performance than MS model for this dataset.
+Therefore, we can conclude that the BS model significantly has a better performance than MS model for this dataset. We can illustrate the performance metrics: log-likelihood and $\rho^2$ as shown in the following image. Since the $rho^2$ of the MS model is quite low, the $\rho^2$ of the BS model is still a high range even if we use the MS model as the base of evaluation.
 
 <img src={require('../data/image1.png')} width={'75%'} />
 
-**Figure 1. Performance comparison between El, MS, BS and the perfect model.**
+**Figure 2. Performance comparison between El, MS, BS and the perfect model.**

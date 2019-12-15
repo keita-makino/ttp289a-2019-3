@@ -6,13 +6,12 @@ import {
   HorizontalGridLines,
   XAxis,
   YAxis,
-  ChartLabel,
-  DiscreteColorLegend
+  ChartLabel
 } from 'react-vis';
 import { Box } from '@material-ui/core';
 import data from '../data/data.json';
 
-type Props = { param: string };
+type Props = { param: string; label: string };
 
 const getFreq = (data: number[], xMin: number, xMax: number) => {
   const segment = 8;
@@ -99,45 +98,43 @@ const Bar: React.FC<Props> = (props: Props) => {
     y: freqA[index].y / freq[index]
   }));
   return (
-    <>
-      <Box
-        margin={'0.6rem 0 0.6rem 0'}
-        style={{ boxSizing: 'border-box', border: '1px gray solid' }}
+    <Box
+      margin={'0.6rem 0 0 0'}
+      style={{ boxSizing: 'border-box', border: '1px gray solid' }}
+    >
+      <XYPlot
+        colorType={'literal'}
+        width={720}
+        height={360}
+        margin={{ left: 85, bottom: 65, right: 25 }}
+        stackBy="y"
       >
-        <XYPlot
-          colorType={'literal'}
-          width={720}
-          height={360}
-          margin={{ left: 85, bottom: 65, right: 25 }}
-          stackBy="y"
-        >
-          <VerticalGridLines />
-          <HorizontalGridLines />
-          <XAxis />
-          <YAxis />
-          <ChartLabel
-            text={props.param}
-            xPercent={0.5}
-            yPercent={0.72}
-            style={{
-              textAnchor: 'center'
-            }}
-          />
-          <ChartLabel
-            text={'# of Observations'}
-            xPercent={0.03}
-            yPercent={0.48}
-            style={{
-              transform: 'rotate(-90)',
-              textAnchor: 'center'
-            }}
-          />
-          <VerticalBarSeries data={freqE} color={'#DAAA00'} />
-          <VerticalBarSeries data={freqT} color={'#002855'} />
-          <VerticalBarSeries data={freqA} color={'#9CAF88'} />
-        </XYPlot>
-      </Box>
-    </>
+        <VerticalGridLines />
+        <HorizontalGridLines />
+        <XAxis />
+        <YAxis />
+        <ChartLabel
+          text={props.label}
+          xPercent={0.5}
+          yPercent={0.72}
+          style={{
+            textAnchor: 'middle'
+          }}
+        />
+        <ChartLabel
+          text={'# of Observations'}
+          xPercent={0.04}
+          yPercent={0.25}
+          style={{
+            transform: 'rotate(-90)',
+            textAnchor: 'middle'
+          }}
+        />
+        <VerticalBarSeries data={freqE} color={'#DAAA00'} opacity={0.8} />
+        <VerticalBarSeries data={freqT} color={'#002855'} opacity={0.8} />
+        <VerticalBarSeries data={freqA} color={'#9CAF88'} opacity={0.8} />
+      </XYPlot>
+    </Box>
   );
 };
 

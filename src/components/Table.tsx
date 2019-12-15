@@ -145,12 +145,12 @@ const Table: React.FC<Props> = (props: Props) => {
               ).toFixed(3)}
             </TableCell>
             <TableCell>
-              <Tex math={'\\rho^2_{EL}'}></Tex> {': '}
+              <Tex math={'\\rho^2_{(EL)}_{EL}'}></Tex> {': '}
               {props.resultStats.rho.toFixed(3)}
             </TableCell>
             <TableCell>
               {'adj. '}
-              <Tex math={'\\rho^2_{EL}'}></Tex>
+              <Tex math={'\\rho^2_{(EL)}_{EL}'}></Tex>
               {': '}
               {props.resultStats.rho2.toFixed(3)}
             </TableCell>

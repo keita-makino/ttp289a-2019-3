@@ -17,6 +17,8 @@ ba = base(database %>% .[complete.cases(.),], "auto")
 bt = base(database %>% .[complete.cases(.),], "train")
 bm = market(database %>% .[complete.cases(.),])
 
+pchisq(2 * (bm$LLout - ba$LLout), 3)
+
 source("./reduced.R")
 assign("reducedVariable", c("train", "auto"))
 re = reduced(database %>% .[.$choice != 2,] %>% .[complete.cases(.),], reducedVariable, "auto")
@@ -52,4 +54,8 @@ nt = nested(database %>% .[complete.cases(.),], groupVariable, "auto")
 
 assign("groupVariable", c("el", "train"))
 na = nested(database %>% .[complete.cases(.),], groupVariable, "auto")
+
+source("./nestedmarket.R")
+assign("groupVariable", c("el", "train"))
+nm = nestedmarket(database %>% .[complete.cases(.),], groupVariable, "auto")
 

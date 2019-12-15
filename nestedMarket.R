@@ -1,12 +1,9 @@
-nested = function(database, groupVariable, base) {
+nestedmarket = function(database, groupVariable, base) {
   apollo_beta = c(
     asc_el = 0,
     asc_train = 0,
     asc_auto = 0,
-    b_lhfs1 = 0,
-    b_lhfs3 = 0,
-    b_minttime = 0,
-    lambda_Group = 0.5
+    lambda_Group = 0.95
   )
   
   apollo_fixed = c(paste("asc_", base, sep = ""))
@@ -19,19 +16,16 @@ nested = function(database, groupVariable, base) {
   
   model = apollo_estimate(apollo_beta,
                           apollo_fixed,
-                          prob_nested,
+                          prob_nestedmarket,
                           apollo_inputs)
   
   assign("groupVariable", groupVariable)
-  
-  source("./output.R")
-  output(model)
   
   return(model)
 }
 
 
-prob_nested = function(apollo_beta,
+prob_nestedmarket = function(apollo_beta,
                      apollo_inputs,
                      functionality = "estimate") {
   apollo_attach(apollo_beta,
@@ -41,9 +35,9 @@ prob_nested = function(apollo_beta,
   P = list()
   V = list()
   
-  V[["el"]] = asc_el + b_lhfs1 * lhfs1_el + b_lhfs3 * lhfs3_el + b_minttime * minttime_el
-  V[["train"]] = asc_train + b_lhfs1 * lhfs1_train + b_lhfs3 * lhfs3_train + b_minttime * minttime_train
-  V[["auto"]] = asc_auto + b_lhfs1 * lhfs1_auto + b_lhfs3 * lhfs3_auto + b_minttime * minttime_auto
+  V[["el"]] = asc_el 
+  V[["train"]] = asc_train 
+  V[["auto"]] = asc_auto 
   
   nlNests = list(root = 1, Group = lambda_Group)
   

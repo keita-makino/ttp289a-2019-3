@@ -1,0 +1,9 @@
+# 4.
+
+By section 3, we have reviewed the multinomial logit model and nested logit model that could estimate the mode choice of each individual, and examined the difference between the two valid models. In the last section, we will argue about the violation of IIA found in section 2 and a remedy for the issue.
+
+With two reasons, we can conclude that the multinomial logit model presented in section 1 was violating the IIA assumption. Firstly, the Hausman-McFadden test have indicated that when we remove train mode from the dataset, the estimates of the BS model has significantly changed. This proofs IIA is not valid, because if it holds the BS model should be able to correctly estimate the choice decision between rapid transit and automobile [1]. Second, the inclusive value $\Theta_{(Group)}$ was determined as 0.550 in the NA model. Consequently, we identified that the error terms of rapid-transit mode and train mode has a positive correlation of $1 - 0.550^2 = 0.698$. Under IIA assumption, this correlation must be zero.
+
+Given that we have found a violation of IIA, the properties of the BS model, such as estimates or their statistics, are no longer guaranteed as a valid result. A nested model, as we developed, could be one remedy to resolve this issue. However, this is only applicable when there is a correlation between the error terms of the alternatives. If an error term have a certain correlation with the deterministic part of the utility function 1) for the alternative, or 2) for another alternative, we need other solutions.
+
+For type 1) issue, we may develop another model by changing some variables (e.g,, travel time: $TT$) to alternative specific variables (e.g., travel time for rapid transit: $TT_{(el)}$ and travel time for train: $TT_{(el)}$) or adding some variables that would take explanatory power from the error term (e.g., travel cost: $TC$). Type 2) issue could be addressed by developing a dogit model or universal logit model.
