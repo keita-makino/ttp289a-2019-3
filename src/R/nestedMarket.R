@@ -1,9 +1,9 @@
-nestedmarket = function(database, groupVariable, base) {
+nestedMarket = function(database, groupVariable, base) {
   apollo_beta = c(
     asc_el = 0,
     asc_train = 0,
     asc_auto = 0,
-    lambda_Group = 0.95
+    lambda_Group = 0.5
   )
   
   apollo_fixed = c(paste("asc_", base, sep = ""))
@@ -16,18 +16,21 @@ nestedmarket = function(database, groupVariable, base) {
   
   model = apollo_estimate(apollo_beta,
                           apollo_fixed,
-                          prob_nestedmarket,
+                          prob_nestedMarket,
                           apollo_inputs)
   
   assign("groupVariable", groupVariable)
+  
+  source("./output.R")
+  output(model)
   
   return(model)
 }
 
 
-prob_nestedmarket = function(apollo_beta,
-                     apollo_inputs,
-                     functionality = "estimate") {
+prob_nestedMarket = function(apollo_beta,
+                       apollo_inputs,
+                       functionality = "estimate") {
   apollo_attach(apollo_beta,
                 apollo_inputs)
   on.exit(apollo_detach(apollo_beta, apollo_inputs))

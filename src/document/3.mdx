@@ -8,19 +8,19 @@ Similar in the way selecting the variable to truncate in the last IIA testing se
 
 The first model we can create has rapid-transit in the root layer, and has train and automobile in the nested layer.
 
-<img src={require('../data/image2.png')} width={'60%'} />
+<img src={require('../image/image2.png')} width={'60%'} />
 
 **Figure 3.1. Nest structure (el in root level)**
 
 We can justify this structure with an assumption that whether the mode can handle long-distance travel or not is the most importance factor to narrow down the choices for the individual. With this criteria, rapid-transit, which usually serves only within city central, will be clearly distinguished from the others.
 
-<img src={require('../data/image3.png')} width={'60%'} />
+<img src={require('../image/image3.png')} width={'60%'} />
 
 **Figure 3.2. Nest structure (train in root level)**
 
 The last structure separates automobile from the rapid transit and train. Under this model, people would first choose if they like to use public transit or private mode.
 
-<img src={require('../data/image4.png')} width={'60%'} />
+<img src={require('../image/image4.png')} width={'60%'} />
 
 **Figure 3.3. Nest structure (auto in root level)**
 
@@ -38,6 +38,7 @@ We name the nested models with these structure respectively NE, NT, and NA model
 | Travel Time            | -0.054                      | 0.019                  | -2.772 \*\*                 |
 | $\Theta_{(Group)}$     | 1.139                       | 0.351                  | -3.247 \*\*                 |
 | $\mathcal{L}$: -61.959 | $\mathcal{L}(EL)$: -125.242 | $\rho^2_{(EL)}$: 0.505 | Adj. $\rho^2_{(EL)}$: 0.457 |
+|                        | $\mathcal{L}(MS)$: -118.013 | $\rho^2_{(MS)}$: 0.475 | Adj. $\rho^2_{(MS)}$: 0.441 |
 
 **Table 6.2. NT Model (N=114)**
 
@@ -51,6 +52,7 @@ We name the nested models with these structure respectively NE, NT, and NA model
 | Travel Time            | -0.064                      | 0.037                  | -2.417 \*\*                 |
 | $\Theta_{(Group)}$     | 1.299                       | 0.410                  | -3.166 \*\*                 |
 | $\mathcal{L}$: -61.710 | $\mathcal{L}(EL)$: -125.242 | $\rho^2_{(EL)}$: 0.507 | Adj. $\rho^2_{(EL)}$: 0.459 |
+|                        | $\mathcal{L}(MS)$: -118.013 | $\rho^2_{(MS)}$: 0.477 | Adj. $\rho^2_{(MS)}$: 0.443 |
 
 **Table 6.3. NA Model (N=114)**
 
@@ -64,6 +66,7 @@ We name the nested models with these structure respectively NE, NT, and NA model
 | Travel Time            | -0.050                      | 0.014                  | -3.476 \*\*                 |
 | $\Theta_{(Group)}$     | 0.550                       | 0.192                  | 2.862 \*\*                  |
 | $\mathcal{L}$: -60.633 | $\mathcal{L}(EL)$: -125.242 | $\rho^2_{(EL)}$: 0.516 | Adj. $\rho^2_{(EL)}$: 0.468 |
+|                        | $\mathcal{L}(MS)$: -118.013 | $\rho^2_{(MS)}$: 0.486 | Adj. $\rho^2_{(MS)}$: 0.452 |
 
 Clearly, the first two models have a fatal invalidity in the estimates. From theoretical derivation, the inclusive value for the nested layer $\Theta_{(Group)}$ cannot exceed 1 since the following value must represents the correlation between the error terms of the alternatives in the nested layer.
 
@@ -73,7 +76,7 @@ $$
 
 However, it does in the first two (NE, NT) models where either rapid transit or train is placed in the root layer. Given this result, we argue only the NA model later in this section.
 
-Looking at the outcome of the NA model, all the variables except for asc_train have become significant in the model. Comparing the coefficients between those in BS model, the order of generic variables are not largely different, and they keep the same level of confidence level in the significance. One noticeable difference would be asc_el, which has become a significant variable in the RA model and has a larger magnitude. However, note that this is an UMNL model and the arc elasticity cannot be compared in the same manner to that in the BS model.
+Looking at the outcome of the NA model, all the variables except for asc_train have become significant in the model. Comparing the coefficients between those in BS model, the order of generic variables are not largely different, and they keep the same level of confidence level in the significance. One noticeable difference would be asc_el, which has become a significant variable in the RA model and has a larger magnitude. However, note that this is an UMNL model and the arc elasticity cannot be compared in the same manner to that in the BS model. The goodness-of-fit (performance) of this model was identified as better than that of BS model in all measurements (non-adjusted/adjusted $\times$ ELbase/MSbase), with the improvement varying from 0.003 to 0.011.
 
 The inclusive value $\Theta_{(Group)}$ is determined as 0.550, which indicates that the correlation between error term of rapid-transit mode and train mode is:
 
