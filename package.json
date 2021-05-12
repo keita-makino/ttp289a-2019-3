@@ -54,7 +54,7 @@
     "katex": "^0.11.1",
     "license-checker": "^25.0.1",
     "lint-staged": "^9.4.2",
-    "mathjs": "^6.2.5",
+    "mathjs": "^7.5.1",
     "prettier": "^1.18.2",
     "react-app-rewire-hot-loader": "^2.0.1",
     "react-app-rewired": "^2.1.5",
